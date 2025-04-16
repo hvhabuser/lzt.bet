@@ -3,467 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Фотограф с портфолио</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <title>Портфолио Разработчика</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- Пример подключения Font Awesome -->
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <img src="assets/logo.png" alt="Логотип">
+
+    <div id="preloader">
+        <div class="loader-logo">
+            <span>l</span><span>z</span><span>t</span><span>.</span><span>b</span><span>e</span><span>t</span>
         </div>
-        <nav class="nav-desktop">
-            <a href="#author" class="nav-link">Спикер</a>
-            <a href="#program" class="nav-link">О курсе</a>
-            <a href="#tariffs" class="nav-link">Тарифы</a>
-            <a class="btn btn-primary nav-link btn-nav" href="#tariffs" style="margin-left: 30ch;">К курсу</a>
-        </nav>
-        <button class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <nav class="mobile-menu">
-            <a href="#author" class="nav-link">Спикер</a>
-            <a href="#program" class="nav-link">О курсе</a>
-            <a href="#tariffs" class="nav-link">Тарифы</a>
-            <a class="btn btn-primary nav-link" href="#tariffs">К курсу</a>
+        <img src="assets/logo-main.svg" alt="LZT.BET Logo" id="preloader-logo-svg">
+    </div>
+
+    <header class="header">
+        <nav class="container">
+            <a href="#" class="logo">lzt.bet</a>
+            <ul class="nav-links">
+                <li><a href="#reviews">Тема</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
         </nav>
     </header>
+
     <section class="hero">
-        <div class="content">
-            <div class="image-container">
-                <div class="bg-circle"></div>
-                <img src="assets/girl.png" alt="Девушка в кулинарной форме">
-            </div>
-            <div class="text-container">
-                <p style="margin: 0; color: white;">2-х месячный курс по фото и мобильной съемке</p>
-                <h1>"Фотограф с портфолио"</h1>
-                <p>Научитесь фотографировать как профессионал на фотоаппарат или телефон, а также наймите своего первого клиента</p>
-                <div class="buttons">
-                    <a href="#" class="btn btn-primary" style="font-weight: 600;">Перейти к курсу</a>
-                    <a href="#" style="font-size: 14px; font-weight: 600; color: #ff5b5b; background-color: transparent; border: 2px solid #ff5b5b" class="btn btn-primary">
-                        <svg width="10" height="12" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M18.3637 10.8149C19.5942 11.6014 19.5942 13.3986 18.3637 14.1851L3.07716 23.9564C1.74589 24.8074 0 23.8513 0 22.2713V2.7287C0 1.1487 1.74589 0.192597 3.07716 1.04356L18.3637 10.8149Z" fill="#FF5B5B"/>
-                        </svg>
-                        О курсе за 2 минуты
+        <div class="hero-content container">
+            <h1><span class="highlight">Python</span> Разработчик &<br> Мастер <span class="highlight">Веб-верстки</span></h1>
+            <a href="#reviews" class="cta-button">Информация</a>
+        </div>
+        <div class="hero-bg-gradient"></div>
+    </section>
+    <section id="reviews" class="reviews section">
+        <div class="container">
+            <h2 class="section-title">Тема на лолзике</h2>
+            <div class="reviews-content">
+                <div class="review-source-card">
+                    <i class="fas fa-star review-icon"></i>
+                    <p>Сиськи письки и<span class="highlight"> отзывы</span> от клиентов собраны в одном месте.</p>
+                    <a href="https://lolz.live/threads/8514735/" target="_blank" rel="noopener noreferrer" class="forum-link-anchor">
+                        <div class="forum-link-display">
+                            <span class="forum-platform">lolz.live</span><span class="forum-separator">/</span><span class="forum-thread">threads/8514735</span>
+                        </div>
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="skills">
-        <div class="section-header">
-            <div class="section-title-wrapper">
-                <img class="left-selector" src="assets/left-selector.png" alt="">
-                <h2 class="section-title">Вы сумеете после обучения</h2>
-                <img class="right-selector" src="assets/right-selector.png" alt="">
-            </div>
-        </div>
-        <div class="skills-grid">
-            <div class="skill-block">
-                <h3>Использовать 100% возможностей камеры</h3>
-                <p>Lorem ipsum dolor sit amet consectetur. Fusce tellus magna pellentesque tellus venenatis. Purus orci ullamcorper fames congue sagittis at massa. Et metus velit purus amet.</p>
-            </div>
-            <div class="skill-block">
-                <h3>Обрабатывать фото в приложениях</h3>
-                <p>Lorem ipsum dolor sit amet consectetur. Fusce tellus magna pellentesque tellus venenatis. Purus orci ullamcorper fames congue sagittis at massa. Et metus velit purus amet.</p>
-            </div>
-            <div class="skill-block">
-                <h3>Полностью организовывать личные съемки</h3>
-                <p>Lorem ipsum dolor sit amet consectetur. Fusce tellus magna pellentesque tellus venenatis. Purus orci ullamcorper fames congue sagittis at massa. Et metus velit purus amet.</p>
-            </div>
-            <div class="skill-block">
-                <h3>Найдете первого клиента</h3>
-                <p>Lorem ipsum dolor sit amet consectetur. Fusce tellus magna pellentesque tellus venenatis. Purus orci ullamcorper fames congue sagittis at massa. Et metus velit purus amet.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="program" class="program">
-        <div class="section-header">
-            <div class="section-title-wrapper">
-                <img class="left-selector" src="assets/left-selector.png" alt="">
-                <h2 class="section-title">Программа обучения</h2>
-                <img class="right-selector" src="assets/right-selector.png" alt="">
-            </div>
-        </div>
-        <div class="module-list">
-            <div class="module-item">
-                <div class="module-header">
-                    <span class="module-title">Модуль 1. Введение в профессию</span>
-                    <button class="module-toggle plus">+</button>
-                </div>
-                <div class="module-content">
-                    <p>Пример текста. Пример текста. Пример текста. Пример текста. Пример текста. Пример текста.</p>
-                    <p>Еще немного текста для примера. Этот абзац делает вид, что здесь важная информация о модуле.</p>
-                    <p>Третий абзац для наглядности. Чтобы показать, как будет выглядеть контент при раскрытии блока.</p>
-                </div>
-            </div>
-            <div class="module-item">
-                <div class="module-header">
-                    <span class="module-title">Модуль 2. Техника и программы</span>
-                    <button class="module-toggle minus">-</button>
-                </div>
-                <div class="module-content">
-                    <ul>
-                        <li>Зачем нужна техника и программы?</li>
-                        <li>Выбор камеры и объектива для работы</li>
-                        <li>Где и как хранить фотографии?</li>
-                        <li>Программы для фотографий которые улучшат твои фото до неузнаваемости</li>
-                    </ul>
-                    <p>Пример текста. Пример текста. Пример текста. Пример текста. Пример текста. Пример текста.</p>
-                    <p>Еще немного текста для примера. Этот абзац делает вид, что здесь важная информация о модуле.</p>
-                    <p>Третий абзац для наглядности. Чтобы показать, как будет выглядеть контент при раскрытии блока.</p>
-                </div>
-            </div>
-            <div class="module-item">
-                <div class="module-header">
-                    <span class="module-title">Модуль 3. Основы фотографии</span>
-                    <button class="module-toggle plus">+</button>
-                </div>
-                <div class="module-content">
-                    <p>Пример текста. Пример текста. Пример текста. Пример текста. Пример текста. Пример текста.</p>
-                    <p>Еще немного текста для примера. Этот абзац делает вид, что здесь важная информация о модуле.</p>
-                    <p>Третий абзац для наглядности. Чтобы показать, как будет выглядеть контент при раскрытии блока.</p>
-                </div>
-            </div>
-            <div class="module-item">
-                <div class="module-header">
-                    <span class="module-title">Модуль 4. Практическая съемка</span>
-                    <button class="module-toggle plus">+</button>
-                </div>
-                <div class="module-content">
-                    <p>Пример текста. Пример текста. Пример текста. Пример текста. Пример текста. Пример текста.</p>
-                    <p>Еще немного текста для примера. Этот абзац делает вид, что здесь важная информация о модуле.</p>
-                    <p>Третий абзац для наглядности. Чтобы показать, как будет выглядеть контент при раскрытии блока.</p>
-                </div>
-            </div>
-            <div class="module-item">
-                <div class="module-header">
-                    <span class="module-title">Модуль 5. Обработка фотографий</span>
-                    <button class="module-toggle plus">+</button>
-                </div>
-                <div class="module-content">
-                    <p>Пример текста. Пример текста. Пример текста. Пример текста. Пример текста. Пример текста.</p>
-                    <p>Еще немного текста для примера. Этот абзац делает вид, что здесь важная информация о модуле.</p>
-                    <p>Третий абзац для наглядности. Чтобы показать, как будет выглядеть контент при раскрытии блока.</p>
-                </div>
-            </div>
-            <div class="module-item">
-                <div class="module-header">
-                    <span class="module-title">Модуль 6. Поиск клиентов</span>
-                    <button class="module-toggle plus">+</button>
-                </div>
-                <div class="module-content">
-                    <p>Пример текста. Пример текста. Пример текста. Пример текста. Пример текста. Пример текста.</p>
-                    <p>Еще немного текста для примера. Этот абзац делает вид, что здесь важная информация о модуле.</p>
-                    <p>Третий абзац для наглядности. Чтобы показать, как будет выглядеть контент при раскрытии блока.</p>
-                </div>
-            </div>
-            <div class="module-item module-item--starred">
-                <div class="module-header">
-                    <span class="module-title"><span class="star">*</span> Модуль 7. Личный бренд в Instagram</span>
-                    <button class="module-toggle plus">+</button>
-                </div>
-                <div class="module-content">
-                    <p>Пример текста. Пример текста. Пример текста. Пример текста. Пример текста. Пример текста.</p>
-                    <p>Еще немного текста для примера. Этот абзац делает вид, что здесь важная информация о модуле.</p>
-                    <p>Третий абзац для наглядности. Чтобы показать, как будет выглядеть контент при раскрытии блока.</p>
-                </div>
-            </div>
-            <div class="module-item module-item--starred">
-                <div class="module-header">
-                    <span class="module-title"><span class="star">*</span> Модуль 8. Работа с репутацией и отзывами</span>
-                    <button class="module-toggle plus">+</button>
-                </div>
-                <div class="module-content">
-                    <p>Пример текста. Пример текста. Пример текста. Пример текста. Пример текста. Пример текста.</p>
-                    <p>Еще немного текста для примера. Этот абзац делает вид, что здесь важная информация о модуле.</p>
-                    <p>Третий абзац для наглядности. Чтобы показать, как будет выглядеть контент при раскрытии блока.</p>
-                </div>
-            </div>
-            <div class="module-item module-item--starred">
-                <div class="module-header">
-                    <span class="module-title"><span class="star">*</span> Модуль 9. Прорыв в доходе</span>
-                    <button class="module-toggle plus">+</button>
-                </div>
-                <div class="module-content">
-                    <p>Пример текста. Пример текста. Пример текста. Пример текста. Пример текста. Пример текста.</p>
-                    <p>Еще немного текста для примера. Этот абзац делает вид, что здесь важная информация о модуле.</p>
-                    <p>Третий абзац для наглядности. Чтобы показать, как будет выглядеть контент при раскрытии блока.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="perks">
-        <div class="section-header">
-            <div class="section-title-wrapper">
-                <img class="left-selector" src="assets/left-selector.png" alt="">
-                <h2 class="section-title">Дополнительные фишки обучения</h2>
-                <img class="right-selector" src="assets/right-selector.png" alt="">
-            </div>
-        </div>
-        <div class="perks-grid">
-            <div class="perk-item">
-                <svg width="22" height="28" viewBox="0 0 22 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19.2806 10.1326C21.7218 12.1331 21.7218 15.8669 19.2806 17.8674L8.91916 26.3582C5.65517 29.0329 0.75 26.7108 0.75 22.4909V5.50914C0.75 1.28922 5.65517 -1.03294 8.91916 1.64178L19.2806 10.1326Z" fill="#FF8A87"/>
-                </svg>
-                <p>Lorem ipsum dolor sit amet consectetur. Ut felis rutrum quis aliquam in.</p>
-            </div>
-            <div class="perk-item">
-                <svg width="22" height="28" viewBox="0 0 22 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19.2806 10.1326C21.7218 12.1331 21.7218 15.8669 19.2806 17.8674L8.91916 26.3582C5.65517 29.0329 0.75 26.7108 0.75 22.4909V5.50914C0.75 1.28922 5.65517 -1.03294 8.91916 1.64178L19.2806 10.1326Z" fill="#FF8A87"/>
-                </svg>
-                <p>Lorem ipsum dolor sit amet consectetur. Ut felis rutrum quis aliquam in.</p>
-            </div>
-            <div class="perk-item">
-                <svg width="22" height="28" viewBox="0 0 22 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19.2806 10.1326C21.7218 12.1331 21.7218 15.8669 19.2806 17.8674L8.91916 26.3582C5.65517 29.0329 0.75 26.7108 0.75 22.4909V5.50914C0.75 1.28922 5.65517 -1.03294 8.91916 1.64178L19.2806 10.1326Z" fill="#FF8A87"/>
-                </svg>
-                <p>Lorem ipsum dolor sit amet consectetur. Ut felis rutrum quis aliquam in.</p>
-            </div>
-            <div class="perk-item">
-                <svg width="22" height="28" viewBox="0 0 22 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19.2806 10.1326C21.7218 12.1331 21.7218 15.8669 19.2806 17.8674L8.91916 26.3582C5.65517 29.0329 0.75 26.7108 0.75 22.4909V5.50914C0.75 1.28922 5.65517 -1.03294 8.91916 1.64178L19.2806 10.1326Z" fill="#FF8A87"/>
-                </svg>
-                <p>Lorem ipsum dolor sit amet consectetur. Ut felis rutrum quis aliquam in.</p>
-            </div>
-            <div class="perk-item">
-                <svg width="22" height="28" viewBox="0 0 22 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19.2806 10.1326C21.7218 12.1331 21.7218 15.8669 19.2806 17.8674L8.91916 26.3582C5.65517 29.0329 0.75 26.7108 0.75 22.4909V5.50914C0.75 1.28922 5.65517 -1.03294 8.91916 1.64178L19.2806 10.1326Z" fill="#FF8A87"/>
-                </svg>
-                <p>Lorem ipsum dolor sit amet consectetur. Ut felis rutrum quis aliquam in.</p>
-            </div>
-            <div class="perk-item">
-                <svg width="22" height="28" viewBox="0 0 22 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19.2806 10.1326C21.7218 12.1331 21.7218 15.8669 19.2806 17.8674L8.91916 26.3582C5.65517 29.0329 0.75 26.7108 0.75 22.4909V5.50914C0.75 1.28922 5.65517 -1.03294 8.91916 1.64178L19.2806 10.1326Z" fill="#FF8A87"/>
-                </svg>
-                <p>Lorem ipsum dolor sit amet consectetur. Ut felis rutrum quis aliquam in.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="tariffs" class="tariffs">
-        <div class="section-header" style="margin-bottom: 100px;">
-            <div class="section-title-wrapper">
-                <img class="left-selector" src="assets/left-selector.png" alt="">
-                <h2 class="section-title">Тарифы</h2>
-                <img class="right-selector" src="assets/right-selector.png" alt="">
-            </div>
-        </div>
-        <div class="tariffs-grid">
-            <div class="tariff-card" style="border: 2px solid #ffffff;">
-                <img src="assets/logotype-card.png" alt="Tariff Logo" class="tariff-book-image">
-                <h2>СНИМАЙ ДЛЯ СЕБЯ</h2>
-                <ul>
-                    <li><span class="module-prefix">Модуль №1</span>. Введение в профессию</li>
-                    <li><span class="module-prefix">Модуль №2</span>. Техника и программы</li>
-                    <li><span class="module-prefix">Модуль №4</span>. Основы фотографии</li>
-                    <li><span class="module-prefix">Модуль №5</span>. Обработка фотографий</li>
-                    <li><span class="module-prefix">Модуль №6</span>. Поиск клиентов</li>
-                    <li><s><span class="module-prefix">Модуль №7</span>. Личный бренд Instagram</s></li>
-                    <li><s><span class="module-prefix">Модуль №8</span>. Работа с репутацией</s></li>
-                    <li><s><span class="module-prefix">Модуль №9</span>. Прорыв в доходе</s></li>
-                </ul>
-                <h3>Дополнительно</h3>
-                <ul>
-                    <li>Закрытый чат участников</li>
-                    <li>Конспекты, чек-листы и полезные материалы</li>
-                    <li>Эфиры с ответами на вопросы раз в неделю</li>
-                    <li>Эфиры с психологом для проработки страхов</li>
-                    <li>Пошаговые алгоритмы действий от Спикера</li>
-                    <li>Практические задания</li>
-                    <li><s>Поддержка и помощь в течении трех месяцев после старта обучения лично от спикера</s></li>
-                    <li>Пополнение портфолио</li>
-                    <li>Домашние задания без проверки</li>
-                    <li><s>Детальная практика по фотосъемке</s></li>
-                    <li><s>Закрытый канал со всеми полезными материалами на сегодняшний день</s></li>
-                    <li><s>Групповые созвоны со спикером</s></li>
-                    <li><s>Возможность живой встречи со спикером</s></li>
-                    <li><s>Личный разбор с Альбиной по итогам обучения</s></li>
-                    <li><s>Индивидуальное практическое занятие со съемкой</s></li>
-                    <li>Доступ к курсу после его окончания на 3 месяца</li>
-                    <li>Итоговая работа</li>
-                    <li>Сертификат по окончанию курса</li>
-                </ul>
-                <div class="price">
-                    <span class="price-original">24 990 ₽</span>
-                    <span class="price-discounted">19 990 ₽</span>
-                </div>
-                <div class="tariff-buttons">
-                    <a href="#" class="btn btn-primary">Оплатить полностью</a>
-                    <a href="#" class="btn btn-secondary">Оформить рассрочку</a>
-                </div>
-                <p class="installment-note">*Беспроцентная рассрочка доступна на 3, 6 и 12 месяцев</p>
-            </div>
-            <div class="tariff-card" style="background-color: #FF4E4E08;">
-                <img src="assets/logotype-card.png" alt="Tariff Logo" class="tariff-book-image">
-                <h2>СНИМАЙ И ЗАРАБАТЫВАЙ</h2>
-                <ul>
-                    <li><span class="module-prefix">Модуль №1</span>. Введение в профессию</li>
-                    <li><span class="module-prefix">Модуль №2</span>. Техника и программы</li>
-                    <li><span class="module-prefix">Модуль №4</span>. Основы фотографии</li>
-                    <li><span class="module-prefix">Модуль №5</span>. Обработка фотографий</li>
-                    <li><span class="module-prefix">Модуль №6</span>. Поиск клиентов</li>
-                    <li><span class="module-prefix">Модуль №7</span>. Личный бренд Instagram</li>
-                    <li><span class="module-prefix">Модуль №8</span>. Работа с репутацией</li>
-                    <li><s><span class="module-prefix">Модуль №9</span>. Прорыв в доходе</s></li>
-                </ul>
-                <h3>Дополнительно</h3>
-                <ul>
-                    <li>Закрытый чат участников</li>
-                    <li>Конспекты, чек-листы и полезные материалы</li>
-                    <li>Эфиры с ответами на вопросы раз в неделю</li>
-                    <li>Эфиры с психологом для проработки страхов</li>
-                    <li>Пошаговые алгоритмы действий от Спикера</li>
-                    <li>Практические задания</li>
-                    <li>Поддержка и помощь в течении трех месяцев после старта обучения лично от спикера</li>
-                    <li>Пополнение портфолио</li>
-                    <li>Домашние задания без проверки</li>
-                    <li><s>Детальная практика по фотосъемке</s></li>
-                    <li>Закрытый канал со всеми полезными материалами на сегодняшний день</li>
-                    <li>Групповые созвоны со спикером</li>
-                    <li><s>Возможность живой встречи со спикером</s></li>
-                    <li><s>Личный разбор с Альбиной по итогам обучения</s></li>
-                    <li><s>Индивидуальное практическое занятие со съемкой</s></li>
-                    <li>Доступ к курсу после его окончания на 3 месяца</li>
-                    <li>Итоговая работа</li>
-                    <li>Сертификат по окончанию курса</li>
-                </ul>
-                <div class="price">
-                    <span class="price-original">34 990 ₽</span>
-                    <span class="price-discounted">29 990 ₽</span>
-                </div>
-                <div class="tariff-buttons">
-                    <a href="#" class="btn btn-primary">Оплатить полностью</a>
-                    <a href="#" class="btn btn-secondary">Оформить рассрочку</a>
-                </div>
-                <p class="installment-note">*Беспроцентная рассрочка доступна на 3, 6 и 12 месяцев</p>
-            </div>
-            <div class="tariff-card" style="background-color: #FF4E4E0F;">
-                <img src="assets/logotype-card.png" alt="Tariff Logo" class="tariff-book-image">
-                <h2>ЛИЧНОЕ ВЕДЕНИЕ</h2>
-                <ul>
-                    <li><span class="module-prefix">Модуль №1</span>. Введение в профессию</li>
-                    <li><span class="module-prefix">Модуль №2</span>. Техника и программы</li>
-                    <li><span class="module-prefix">Модуль №4</span>. Основы фотографии</li>
-                    <li><span class="module-prefix">Модуль №5</span>. Обработка фотографий</li>
-                    <li><span class="module-prefix">Модуль №6</span>. Поиск клиентов</li>
-                    <li><span class="module-prefix">Модуль №7</span>. Личный бренд Instagram</li>
-                    <li><span class="module-prefix">Модуль №8</span>. Работа с репутацией</li>
-                    <li><s><span class="module-prefix">Модуль №9</span>. Прорыв в доходе</s></li>
-                </ul>
-                <h3>Дополнительно</h3>
-                <ul>
-                    <li>Закрытый чат участников</li>
-                    <li>Конспекты, чек-листы и полезные материалы</li>
-                    <li>Эфиры с ответами на вопросы раз в неделю</li>
-                    <li>Эфиры с психологом для проработки страхов</li>
-                    <li>Пошаговые алгоритмы действий от Спикера</li>
-                    <li>Практические задания</li>
-                    <li>Поддержка и помощь в течении трех месяцев после старта обучения лично от спикера</li>
-                    <li>Пополнение портфолио</li>
-                    <li>Домашние задания с проверкой</li>
-                    <li>Детальная практика по фотосъемке</li>
-                    <li>Закрытый канал со всеми полезными материалами на сегодняшний день</li>
-                    <li>Групповые созвоны со спикером</li>
-                    <li>Возможность живой встречи со спикером</li>
-                    <li>Личный разбор с Альбиной по итогам обучения</li>
-                    <li>Индивидуальное практическое занятие со съемкой</li>
-                    <li>Доступ к курсу после его окончания на 9 месяцев</li>
-                    <li>Итоговая работа</li>
-                    <li>Сертификат по окончанию курса</li>
-                </ul>
-                <div class="price">
-                    <span class="price-original">69 990 ₽</span>
-                    <span class="price-discounted">49 990 ₽</span>
-                </div>
-                <div class="tariff-buttons">
-                    <a href="#" class="btn btn-primary">Оплатить полностью</a>
-                    <a href="#" class="btn btn-secondary">Оформить рассрочку</a>
-                </div>
-                <p class="installment-note">*Беспроцентная рассрочка доступна на 3, 6 и 12 месяцев</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="author" class="author-section">
-        <div class="author-card">
-            <div class="author-text">
-                <h2>Автор курса — Алекс Бебрин</h2>
-                <p>Lorem ipsum dolor sit amet consectetur. Fusce tellus magna pellentesque tellus venenatis. Purus orci ullamcorper fames congue sagittis at massa. Et metus velit purus amet. Nisl volutpat eu sit faucibus lacinia faucibus id. Convallis ullamcorper a iaculis praesent in porta tincidunt erat sapien. Tristique quisque nullam feugiat velit laoreet pulvinar senectus elit in. Et iaculis vel tempor sed vestibulum. Et iaculis vel tempor sed vestibulum.</p>
-                <div class="author-buttons">
-                    <a href="#" class="btn btn-primary">Мое портфолио</a>
-                    <a href="#" class="btn btn-secondary">Instagram</a>
-                </div>
-            </div>
-            <div class="author-image">
-                <img src="assets/author.png" alt="Автор курса Алекс Бебрин">
-            </div>
-        </div>
-    </section>
-
-    <section class="faq-section">
-        <div class="section-header">
-            <div class="section-title-wrapper">
-                <img class="left-selector" src="assets/left-selector.png" alt="">
-                <h2 class="section-title">Ответы на частые вопросы</h2>
-                <img class="right-selector" src="assets/right-selector.png" alt="">
-            </div>
-        </div>
-        <div class="faq-list">
-            <div class="faq-item">
-                <div class="faq-header">
-                    <span class="faq-question">Как я получу доступ к курсу после оплаты?</span>
-                    <button class="faq-toggle plus">+</button>
-                </div>
-                <div class="faq-content">
-                    <p>Lorem ipsum dolor sit amet consectetur. Orci ut posuere tortor arcu odio luctus. Ac imperdiet quam tincidunt vitae venenatis. Eget dolor cras tincidunt amet metus ipsum condimentum duis. Adipiscing hendrerit vel tellus morbi pellentesque odio convallis duis.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-header">
-                    <span class="faq-question">Как я получу доступ к курсу после оплаты?</span>
-                    <button class="faq-toggle plus">+</button>
-                </div>
-                <div class="faq-content">
-                    <p>Lorem ipsum dolor sit amet consectetur. Orci ut posuere tortor arcu odio luctus. Ac imperdiet quam tincidunt vitae venenatis. Eget dolor cras tincidunt amet metus ipsum condimentum duis. Adipiscing hendrerit vel tellus morbi pellentesque odio convallis duis.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-header">
-                    <span class="faq-question">Как я получу доступ к курсу после оплаты?</span>
-                    <button class="faq-toggle plus">+</button>
-                </div>
-                <div class="faq-content">
-                    <p>Lorem ipsum dolor sit amet consectetur. Orci ut posuere tortor arcu odio luctus. Ac imperdiet quam tincidunt vitae venenatis. Eget dolor cras tincidunt amet metus ipsum condimentum duis. Adipiscing hendrerit vel tellus morbi pellentesque odio convallis duis.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-header">
-                    <span class="faq-question">Как я получу доступ к курсу после оплаты?</span>
-                    <button class="faq-toggle plus">+</button>
-                </div>
-                <div class="faq-content">
-                    <p>Lorem ipsum dolor sit amet consectetur. Orci ut posuere tortor arcu odio luctus. Ac imperdiet quam tincidunt vitae venenatis. Eget dolor cras tincidunt amet metus ipsum condimentum duis. Adipiscing hendrerit vel tellus morbi pellentesque odio convallis duis.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-header">
-                    <span class="faq-question">Как я получу доступ к курсу после оплаты?</span>
-                    <button class="faq-toggle plus">+</button>
-                </div>
-                <div class="faq-content">
-                    <p>Lorem ipsum dolor sit amet consectetur. Orci ut posuere tortor arcu odio luctus. Ac imperdiet quam tincidunt vitae venenatis. Eget dolor cras tincidunt amet metus ipsum condimentum duis. Adipiscing hendrerit vel tellus morbi pellentesque odio convallis duis.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
-</html>
-
+</html> 

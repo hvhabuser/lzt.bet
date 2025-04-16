@@ -1,0 +1,864 @@
+/* Глобальные стили и переменные */
+:root {
+    --primary-color: #57b38d; /* Новый основной цвет */
+    --primary-darker: #408e71; /* Новый темный оттенок */
+    --background-color: #0a100d; /* Слегка зеленовато-черный фон */
+    --card-background: #101814; /* Темный фон карточек с зеленым оттенком */
+    --text-color: #c9d1d9;
+    --text-secondary: #8b949e;
+    --border-color: #2a3b35; /* Граница с зеленым оттенком */
+    --gradient-start: #0a100d;
+    --gradient-end: #101c16;
+    --gradient-accent: linear-gradient(90deg, var(--primary-color), var(--primary-darker));
+
+    --font-main: 'Poppins', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    font-size: 16px;
+    position: relative; /* Необходимо для позиционирования псевдоэлемента */
+    z-index: 1; /* Устанавливаем базовый z-index */
+}
+
+/* Псевдоэлемент для фонового логотипа */
+body::before {
+    content: '';
+    position: fixed; /* Фиксированное позиционирование */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/logo-bg.svg'); /* Путь к вашему SVG */
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: clamp(300px, 50vw, 600px); /* Адаптивный размер логотипа */
+    background-attachment: fixed; /* Остается на месте при скролле */
+    opacity: 0.03; /* Очень низкая прозрачность */
+    z-index: -1; /* Помещаем за основным контентом */
+    pointer-events: none; /* Не мешает взаимодействию с контентом */
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1, h2, h3 {
+    color: #ffffff; /* Белый для заголовков для контраста */
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+h1 { font-size: 3rem; line-height: 1.2; }
+h2 { font-size: 2.2rem; }
+h3 { font-size: 1.5rem; }
+
+p {
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--primary-darker);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.section {
+    padding: 80px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--gradient-accent);
+    border-radius: 2px;
+}
+
+.highlight {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.cta-button {
+    display: inline-block;
+    background: var(--gradient-accent);
+    color: #ffffff;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(99, 193, 186, 0.2);
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(99, 193, 186, 0.4);
+    color: #ffffff;
+}
+
+/* Preloader Styles */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.6s ease-out 0.2s, visibility 0s linear 0.8s; /* Fade out starts after 0.2s delay, visibility changes after fade */
+    overflow: hidden; /* Hide dispersing letters */
+}
+
+#preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-logo {
+    display: flex;
+    font-size: 3rem;
+    font-weight: 700;
+    font-family: var(--font-main);
+    color: var(--primary-color);
+    position: absolute; /* Allows logo to appear underneath */
+    transition: opacity 0.5s ease-out; /* Smooth transition for dispersal */
+}
+
+.loader-logo span {
+    opacity: 0;
+    /* Updated Animation: Run once, stay at the end state */
+    animation: letterPulse 1.5s ease-in-out forwards;
+    /* Animation Delays (same as before) */
+}
+.loader-logo span:nth-child(1) { animation-delay: 0.1s; }
+.loader-logo span:nth-child(2) { animation-delay: 0.2s; }
+.loader-logo span:nth-child(3) { animation-delay: 0.3s; }
+.loader-logo span:nth-child(4) { animation-delay: 0.4s; color: var(--text-secondary); } /* Dot style */
+.loader-logo span:nth-child(5) { animation-delay: 0.5s; }
+.loader-logo span:nth-child(6) { animation-delay: 0.6s; }
+.loader-logo span:nth-child(7) { animation-delay: 0.7s; }
+
+
+@keyframes letterPulse {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+        text-shadow: 0 0 5px rgba(87, 179, 141, 0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1); /* Pulse effect */
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1); /* Settle */
+        text-shadow: 0 0 10px rgba(87, 179, 141, 0.8); /* Final glow */
+    }
+}
+
+/* Styles for the new logo */
+#preloader-logo-svg {
+    width: 120px; /* Reduced size */
+    height: auto;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Ease out + overshoot */
+    filter: drop-shadow(0 0 8px rgba(87, 179, 141, 0.6)); /* Initial subtle glow */
+    position: absolute; /* Centered */
+}
+
+
+/* Stage 2: Letters disperse, logo appears */
+
+/* NEW: Fade out the entire text container */
+#preloader.step-2 .loader-logo {
+    opacity: 0;
+    transition: opacity 0.4s ease-in; /* Match span opacity transition duration */
+    pointer-events: none; /* Prevent interaction */
+}
+
+/* MODIFIED: Only apply transform transition to spans */
+#preloader.step-2 .loader-logo span {
+     /* opacity: 0; */ /* <-- REMOVE this opacity change */
+     transition: transform 0.5s ease-in-out; /* Keep only the transform transition */
+}
+
+/* Add staggered dispersal (No changes needed here) */
+#preloader.step-2 .loader-logo span:nth-child(1) { transform: translateY(-60px) rotate(-15deg); transition-delay: 0s; }
+#preloader.step-2 .loader-logo span:nth-child(2) { transform: translateY(-50px) rotate(10deg); transition-delay: 0.05s; }
+#preloader.step-2 .loader-logo span:nth-child(3) { transform: translateY(-65px) rotate(-5deg); transition-delay: 0.1s; }
+#preloader.step-2 .loader-logo span:nth-child(4) { transform: translateY(40px); transition-delay: 0.15s; } /* Dot goes down */
+#preloader.step-2 .loader-logo span:nth-child(5) { transform: translateY(-55px) rotate(15deg); transition-delay: 0.1s; }
+#preloader.step-2 .loader-logo span:nth-child(6) { transform: translateY(-60px) rotate(-10deg); transition-delay: 0.05s; }
+#preloader.step-2 .loader-logo span:nth-child(7) { transform: translateY(-50px) rotate(5deg); transition-delay: 0s; }
+
+#preloader.step-2 #preloader-logo-svg {
+    opacity: 1;
+    transform: scale(1);
+    filter: drop-shadow(0 0 15px rgba(87, 179, 141, 0.8)); /* Enhance glow */
+    transition-delay: 0.3s; /* Increased delay: Logo appears after letters start moving */
+}
+
+/* Header */
+.header {
+    background-color: rgba(13, 17, 23, 0.8); /* Полупрозрачный фон */
+    backdrop-filter: blur(10px);
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.3s ease;
+}
+
+.header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+.logo:hover {
+    color: var(--primary-color);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 25px;
+}
+
+.nav-links a {
+    font-weight: 400;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+     padding-bottom: 5px;
+     border-bottom: 2px solid transparent;
+}
+
+.nav-links a:hover,
+.nav-links a.active { /* Добавить класс active через JS при скролле */
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+/* Burger menu - Базовая структура */
+.burger {
+    display: none;
+    cursor: pointer;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-color);
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh; /* Занимает весь первый экран */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden; /* Для градиента */
+    padding-top: 80px; /* Учитываем высоту хедера */
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+}
+
+.hero-content {
+    z-index: 2;
+    position: relative; /* Чтобы быть над градиентом */
+}
+
+.hero h1 {
+    margin-bottom: 1.5rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+    color: var(--text-color);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Фоновый градиентный эффект */
+.hero-bg-gradient {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 800px; /* Размер можно настроить */
+    height: 800px;
+    /* Используем новый основной цвет для градиента */
+    background: radial-gradient(circle, rgba(87, 179, 141, 0.1) 0%, rgba(87, 179, 141, 0) 70%);
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    pointer-events: none; /* Не мешает кликам */
+    /* Анимация для дыхания */
+    animation: breath 8s ease-in-out infinite;
+}
+
+@keyframes breath {
+    0%, 100% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.6; }
+    /* Слегка меняем прозрачность в анимации */
+    50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.8; }
+}
+
+
+/* About Section */
+.about {
+    background-color: var(--card-background);
+}
+.about-content {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+.about-text {
+    flex: 2;
+}
+/* Стили для фото, если будет */
+.about-photo {
+    flex: 1;
+    max-width: 250px;
+    border-radius: 50%;
+    border: 5px solid var(--primary-color);
+}
+
+/* Skills Section */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.skill-card {
+    background-color: var(--card-background);
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* Добавили border-color */
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Увеличил тень */
+    border-color: var(--primary-color);
+}
+
+.skill-icon {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.skill-card h3 {
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.skill-card p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0;
+}
+
+/* Projects Section */
+.projects {
+     background-color: var(--background-color); /* Чередование фона секций */
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.project-card {
+    background: var(--card-background);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* Добавили border-color */
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* Увеличил тень */
+    border-color: var(--primary-color); /* Подсветка рамки при наведении */
+}
+
+/* Опционально: добавить изображение для проекта */
+/* .project-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+} */
+
+.project-info {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Заставляет контент занимать все доступное место */
+}
+
+.project-info h3 {
+    color: var(--primary-color);
+}
+
+.project-tags {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.project-tags span {
+    /* Немного меняем фон тегов под новую палитру */
+    background-color: rgba(87, 179, 141, 0.1);
+    color: var(--primary-color);
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.project-links {
+    margin-top: auto; /* Прижимает ссылки к низу карточки */
+    padding-top: 1rem; /* Отступ сверху */
+    display: flex;
+    gap: 1rem;
+    border-top: 1px solid var(--border-color); /* Разделитель */
+}
+
+.project-links a {
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.project-links a::before { /* Иконка перед ссылкой */
+    content: '\f0c1'; /* Пример иконки FontAwesome (link) */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    margin-right: 5px;
+}
+.project-links a[href*="github.com"]::before {
+    content: '\f09b'; /* GitHub icon */
+    font-family: 'Font Awesome 5 Brands';
+}
+
+
+/* Contact Section */
+.contact {
+     background-color: var(--card-background);
+}
+.contact-subtitle {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-bottom: 2.5rem;
+    font-size: 1.1rem;
+}
+
+.contact-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 3rem; /* Отступ если используется форма */
+}
+
+.contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 10px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 25px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    color: var(--text-color); /* Основной цвет текста для контактов */
+}
+
+.contact-link i {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+}
+
+.contact-link:hover {
+    /* Делаем фон при наведении чуть заметнее */
+    background-color: rgba(87, 179, 141, 0.15);
+    border-color: var(--primary-color);
+    color: var(--primary-color); /* Цвет текста при наведении */
+}
+
+/* Стили для формы, если раскомментировать */
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    background-color: var(--background-color); /* Фон инпутов */
+    color: var(--text-color);
+    font-family: var(--font-main);
+    font-size: 1rem;
+    transition: border-color 0.3s ease; /* Плавность для фокуса */
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+     border-color: var(--primary-color); /* Подсветка при фокусе */
+     outline: none; /* Убираем стандартный outline */
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: var(--text-secondary);
+}
+
+.contact-form button {
+    align-self: center; /* Кнопка по центру */
+}
+
+
+/* Footer */
+.footer {
+    background-color: var(--background-color);
+    padding: 30px 0;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+}
+
+.footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.footer p {
+    color: var(--text-secondary);
+    margin-bottom: 0;
+    font-size: 0.9rem;
+}
+
+.social-links a {
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    margin: 0 10px;
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-block; /* Для transform */
+}
+
+.social-links a:hover {
+    color: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 1.8rem; }
+
+    .nav-links {
+        position: absolute;
+        right: 0;
+        top: 65px; /* Высота хедера */
+        background-color: var(--card-background); /* Используем цвет фона карточек */
+        flex-direction: column;
+        align-items: center;
+        width: 60%;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+        border-left: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+        padding: 20px 0;
+        border-bottom-left-radius: 8px;
+    }
+
+    .nav-links li {
+        margin-left: 0;
+        opacity: 0; /* Для анимации появления */
+        padding: 15px 0;
+        width: 100%;
+        text-align: center;
+    }
+     .nav-links li a {
+         width: 100%;
+         display: block;
+     }
+
+
+    .nav-links.nav-active {
+        transform: translateX(0%);
+    }
+
+    .burger {
+        display: block;
+    }
+
+    /* Анимация бургер-иконки */
+    .toggle .line1 {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    .toggle .line2 {
+        opacity: 0;
+    }
+    .toggle .line3 {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    /* Анимация появления ссылок */
+    @keyframes navLinkFade {
+        from {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0px);
+        }
+    }
+
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .about-photo {
+        margin-top: 2rem;
+    }
+
+    .skills-grid, .projects-grid {
+        grid-template-columns: 1fr; /* Один столбец на мобильных */
+    }
+
+    .hero-bg-gradient {
+        width: 150%; /* Увеличиваем градиент на мобильных еще больше */
+        height: 70vh;
+        opacity: 0.7; /* Слегка уменьшим яркость на мобильных */
+    }
+
+    .review-source-card p {
+        font-size: 1rem;
+    }
+    .forum-link-display {
+         font-size: 1rem;
+         padding: 10px 18px;
+     }
+    .review-note {
+        font-size: 0.85rem;
+    }
+}
+
+/* Дополнительные стили для активной ссылки при скролле (JS) */
+.nav-links a.active {
+    color: var(--primary-color);
+    font-weight: 600; /* Можно сделать жирнее */
+}
+
+/* Простая анимация появления секций при скролле */
+.section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Reviews Section */
+.reviews {
+    background-color: var(--background-color); /* Или --card-background для чередования */
+    text-align: center;
+}
+
+.reviews-content {
+    max-width: 700px; /* Ограничиваем ширину для лучшего фокуса */
+    margin: 0 auto;
+}
+
+.review-source-card {
+    background-color: var(--card-background);
+    padding: 2.5rem 2rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden; /* Для псевдоэлемента */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25); /* Немного тени */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-source-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* Небольшой эффект градиентной рамки при наведении */
+.review-source-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: 0; /* Под контентом карточки */
+    margin: -1px; /* Толщина рамки */
+    border-radius: inherit;
+    background: var(--gradient-accent);
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+    pointer-events: none;
+}
+
+.review-source-card:hover::before {
+    opacity: 0.6; /* Показать градиентную рамку */
+}
+
+/* Контент внутри карточки должен быть над псевдоэлементом */
+.review-source-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.review-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+.review-source-card p {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.forum-link-display {
+    background-color: rgba(0, 0, 0, 0.25); /* Фон для блока ссылки */
+    border: 1px solid var(--border-color);
+    padding: 12px 25px;
+    border-radius: 6px;
+    display: inline-block; /* Чтобы занимал ширину по контенту + padding */
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    font-family: 'Courier New', Courier, monospace; /* Моноширинный шрифт */
+    font-size: 1.15rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease; /* Добавляем border-color in transition */
+    width: auto; /* Убедимся что ширина автоматическая */
+    color: inherit; /* Наследуем цвет текста */
+    text-decoration: none; /* Убираем подчеркивание у ссылки */
+}
+
+/* Стили для обертки-ссылки */
+.forum-link-anchor {
+    display: inline-block; /* Чтобы ссылка занимала место как блок */
+    text-decoration: none; /* Убираем стандартное подчеркивание */
+    transition: transform 0.2s ease; /* Добавляем легкий эффект приподнимания */
+}
+
+.forum-link-anchor:hover {
+    transform: scale(1.03); /* Слегка увеличиваем при наведении */
+    color: inherit; /* Предотвращаем изменение цвета текста при наведении на ссылку */
+}
+
+.review-source-card:hover .forum-link-display {
+     background-color: rgba(0, 0, 0, 0.4); /* Чуть темнее при наведении на карточку */
+     border-color: rgba(87, 179, 141, 0.5); /* Слегка подсветить рамку */
+}
+
+.forum-platform {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.forum-separator {
+    color: var(--text-secondary);
+    opacity: 0.7;
+    margin: 0 5px;
+}
+
+.forum-thread {
+    color: var(--text-color);
+}
+
+/* Убираем стиль .review-note, т.к. удалили элемент */
+/* .review-note {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+    font-style: italic;
+    opacity: 0.8;
+} */
