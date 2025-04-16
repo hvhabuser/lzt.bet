@@ -628,38 +628,68 @@ img {
 
 
 /* Адаптивность */
+@media (max-width: 1024px) {
+    .container {
+        max-width: 900px;
+    }
+    
+    h1 { font-size: 2.7rem; }
+    h2 { font-size: 2rem; }
+    
+    .section {
+        padding: 70px 0;
+    }
+    
+    .hero-content {
+        max-width: 90%;
+    }
+}
+
 @media (max-width: 768px) {
     h1 { font-size: 2.5rem; }
     h2 { font-size: 1.8rem; }
-
+    h3 { font-size: 1.3rem; }
+    
+    .container {
+        padding: 0 15px;
+    }
+    
+    .section {
+        padding: 60px 0;
+    }
+    
+    .hero {
+        min-height: 90vh;
+    }
+    
     .nav-links {
-        position: absolute;
+        position: fixed;
         right: 0;
-        top: 65px; /* Высота хедера */
-        background-color: var(--card-background); /* Используем цвет фона карточек */
+        top: 65px;
+        background-color: var(--card-background);
         flex-direction: column;
         align-items: center;
-        width: 60%;
+        width: 70%;
+        height: 100vh;
         transform: translateX(100%);
         transition: transform 0.5s ease-in;
         border-left: 1px solid var(--border-color);
-        border-bottom: 1px solid var(--border-color);
         padding: 20px 0;
-        border-bottom-left-radius: 8px;
+        z-index: 999;
     }
 
     .nav-links li {
         margin-left: 0;
-        opacity: 0; /* Для анимации появления */
+        opacity: 0;
         padding: 15px 0;
         width: 100%;
         text-align: center;
     }
-     .nav-links li a {
-         width: 100%;
-         display: block;
-     }
-
+    
+    .nav-links li a {
+        width: 100%;
+        display: block;
+    }
 
     .nav-links.nav-active {
         transform: translateX(0%);
@@ -667,6 +697,7 @@ img {
 
     .burger {
         display: block;
+        z-index: 1000;
     }
 
     /* Анимация бургер-иконки */
@@ -720,6 +751,99 @@ img {
     .review-note {
         font-size: 0.85rem;
     }
+}
+
+@media (max-width: 576px) {
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.6rem; }
+    h3 { font-size: 1.2rem; }
+    
+    .section {
+        padding: 50px 0;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+    }
+    
+    .cta-button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .hero-bg-gradient {
+        width: 200%;
+        height: 60vh;
+    }
+    
+    .review-source-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .review-source-card p {
+        font-size: 1rem;
+    }
+    
+    .forum-link-display {
+        font-size: 0.9rem;
+        padding: 10px 15px;
+    }
+    
+    #preloader-logo-svg {
+        width: 100px;
+    }
+    
+    .loader-logo {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 380px) {
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.4rem; }
+    
+    .section-title {
+        margin-bottom: 2rem;
+    }
+    
+    .review-source-card {
+        padding: 1.5rem 1rem;
+    }
+    
+    .forum-link-display {
+        font-size: 0.8rem;
+        padding: 8px 12px;
+    }
+    
+    #preloader-logo-svg {
+        width: 80px;
+    }
+    
+    .loader-logo {
+        font-size: 2rem;
+    }
+    
+    .container {
+        padding: 0 10px;
+    }
+}
+
+/* Улучшение для устройств с маленькой высотой (ландшафтный режим на телефонах) */
+@media (max-height: 600px) {
+    .hero {
+        min-height: 100vh;
+        padding-top: 60px;
+    }
+    
+    .section {
+        padding: 40px 0;
+    }
+    
+    .section-title {
+        margin-bottom: 1.5rem;
+    }
+    
+    h1 { font-size: 2rem; }
 }
 
 /* Дополнительные стили для активной ссылки при скролле (JS) */
