@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Переход...</title>
+    <title>Подтверждение перехода</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,21 +18,21 @@
             align-items: center;
             min-height: 100vh;
             overflow: hidden; /* Hide scrollbars */
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            background: var(--card-background); /* Use dark background from screenshot */
+            /* background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end)); */ /* Removed gradient */
         }
 
         .redirect-container {
-            background-color: var(--card-background);
-            padding: 3rem 4rem;
-            border-radius: 10px; /* Slightly more rounded */
-            border: 1px solid var(--border-color);
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); /* Enhanced shadow */
-            max-width: 450px; /* Slightly wider */
+            background-color: #333; /* Darker background like screenshot */
+            padding: 2.5rem 3rem; /* Adjusted padding */
+            border-radius: 8px; /* Slightly less rounded */
+            /* border: 1px solid var(--border-color); */ /* Remove border */
+            text-align: left; /* Align text left */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); /* Adjusted shadow */
+            max-width: 600px; /* Wider container */
             width: 90%;
             position: relative;
-            overflow: hidden; /* For pseudo-element */
-            /* Entrance animation */
+            overflow: hidden;
             opacity: 0;
             transform: scale(0.95) translateY(10px);
             animation: containerFadeIn 0.6s 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
@@ -45,39 +45,83 @@
             }
         }
 
-        /* Pulsing gradient border */
+        /* Remove pulsing border */
         .redirect-container::before {
-            content: '';
-            position: absolute;
-            top: 0; right: 0; bottom: 0; left: 0;
-            z-index: 0;
-            margin: -2px; /* Make border slightly thicker */
-            border-radius: inherit;
-            background: var(--gradient-accent);
-            opacity: 0.5; /* Start slightly more visible */
-            pointer-events: none;
-            animation: pulseBorder 2s infinite ease-in-out;
+           display: none;
         }
-
-        @keyframes pulseBorder {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 0.7; }
-        }
-
 
         .redirect-container > * {
-            position: relative; /* Ensure content is above the pseudo-element */
+            position: relative;
             z-index: 1;
         }
 
+        /* Styles for Confirmation Section */
+        .confirmation-section {
+            /* Default visible */
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .confirmation-section.hidden,
+        .loading-section.hidden {
+            display: none;
+        }
+
+
+        .confirmation-title {
+            color: #e74c3c; /* Red color for title */
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .confirmation-text {
+             color: #ccc; /* Lighter text color */
+             font-size: 0.95rem; /* Smaller text */
+             margin-bottom: 1.8rem;
+             line-height: 1.6;
+             text-align: left;
+        }
+
+        .confirm-button {
+            display: block; /* Full width */
+            width: 100%;
+            background-color: #2ecc71; /* Green button */
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 1rem; /* Space above button */
+        }
+
+        .confirm-button:hover {
+             background-color: #27ae60; /* Darker green on hover */
+             transform: translateY(-2px);
+        }
+        .confirm-button:active {
+             transform: translateY(0);
+        }
+
+
+        /* Styles for Loading Section (initially hidden) */
+        .loading-section {
+            text-align: center; /* Center loading elements */
+             /* Text fade-in animation */
+             opacity: 0;
+             animation: textFadeIn 0.5s 0.1s ease-out forwards; /* Faster fade in */
+        }
+
+
         .redirect-message {
             color: var(--text-color);
-            font-size: 1.6rem; /* Slightly larger text */
+            font-size: 1.4rem; /* Adjusted size */
             font-weight: 600;
-            margin-bottom: 2rem; /* More space below */
-            /* Text fade-in animation */
-            opacity: 0;
-            animation: textFadeIn 0.8s 0.5s ease-out forwards;
+            margin-bottom: 2rem;
         }
 
         @keyframes textFadeIn {
@@ -86,23 +130,23 @@
              }
         }
 
-        /* New loading animation: Wave */
+        /* Loading wave animation (keep as is) */
         .loading-wave {
             display: flex;
             justify-content: center;
-            align-items: flex-end; /* Align to bottom for wave effect */
-            height: 30px; /* Give it some height */
+            align-items: flex-end;
+            height: 30px;
         }
 
         .loading-wave span {
             display: inline-block;
             width: 8px;
-            height: 5px; /* Start small */
-            background-color: var(--primary-color);
-            border-radius: 4px; /* Rounded bars */
+            height: 5px;
+            background-color: var(--primary-color); /* Use primary color for wave */
+            border-radius: 4px;
             margin: 0 3px;
             animation: wave 1.2s infinite ease-in-out;
-            opacity: 0; /* Start hidden */
+            /* Opacity is handled by animation */
         }
 
         /* Stagger the animation delays */
@@ -120,19 +164,29 @@
                  transform: translateY(0);
             }
             50% {
-                height: 25px; /* Grow taller */
+                height: 25px;
                 opacity: 1;
-                transform: translateY(-5px); /* Slight move up */
+                transform: translateY(-5px);
             }
         }
 
         /* --- Responsive adjustments --- */
-         @media (max-width: 480px) {
+         @media (max-width: 640px) {
             .redirect-container {
-                padding: 2rem 1.5rem; /* Less padding on small screens */
+                padding: 2rem 1.5rem;
             }
+             .confirmation-title {
+                 font-size: 1.2rem;
+             }
+             .confirmation-text {
+                  font-size: 0.9rem;
+             }
              .redirect-message {
-                 font-size: 1.3rem;
+                  font-size: 1.2rem;
+             }
+             .confirm-button {
+                 font-size: 0.9rem;
+                 padding: 0.7rem 1rem;
              }
          }
     </style>
@@ -140,33 +194,80 @@
 <body class="redirect-page">
 
     <div class="redirect-container">
-        <div class="redirect-message">Переход по ссылке...</div>
-        <!-- Updated loading animation HTML -->
-        <div class="loading-wave">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+
+        <!-- Confirmation Section (Visible Initially) -->
+        <div class="confirmation-section">
+            <h2 class="confirmation-title">Внимание!</h2>
+            <p class="confirmation-text" id="confirmationText"></p>
+            <button class="confirm-button" id="confirmButton"></button>
         </div>
+
+        <!-- Loading Section (Hidden Initially) -->
+        <div class="loading-section hidden">
+             <div class="redirect-message">Переход по ссылке...</div>
+             <div class="loading-wave">
+                 <span></span>
+                 <span></span>
+                 <span></span>
+                 <span></span>
+                 <span></span>
+             </div>
+        </div>
+
     </div>
 
     <script>
-        // Redirect after a delay
-        const redirectUrl = "https://devai.digital";
-        const delay = 3000; // Increased delay slightly to appreciate animations (3 seconds)
+        const redirectUrl = "https://devai.digital"; // Your target URL
+        const delayAfterConfirm = 1500; // Delay *after* confirmation (1.5 seconds)
 
-        setTimeout(() => {
-            // Optionally add a fade-out animation before redirecting
-             document.querySelector('.redirect-container').style.transition = 'opacity 0.5s ease-out';
-             document.querySelector('.redirect-container').style.opacity = '0';
+        const confirmationSection = document.querySelector('.confirmation-section');
+        const loadingSection = document.querySelector('.loading-section');
+        const confirmButton = document.getElementById('confirmButton');
+        const confirmationTextElement = document.getElementById('confirmationText');
+        const container = document.querySelector('.redirect-container');
 
-            // Redirect after fade-out completes
-            setTimeout(() => {
-                window.location.href = redirectUrl;
-            }, 500); // Match fade-out duration
+        // Function to extract domain
+        function getDomain(url) {
+            try {
+                return new URL(url).hostname;
+            } catch (e) {
+                // Handle cases where URL might be relative or invalid
+                // For simplicity, return a placeholder or the original string
+                console.error("Could not parse URL:", url);
+                return url;
+            }
+        }
 
-        }, delay);
+        const domain = getDomain(redirectUrl);
+
+        // Set confirmation text and button text
+        confirmationTextElement.textContent = `Вы собираетесь покинуть сайт "${window.location.hostname}" и перейти на другой, сторонний сайт, к которому мы не имеем никакого отношения. Нажмите на кнопку ниже, чтобы перейти к ${domain}.`;
+        confirmButton.textContent = `Перейти на ${domain}`;
+
+        // Add event listener to the button
+        confirmButton.addEventListener('click', () => {
+             // 1. Hide confirmation, show loading
+             confirmationSection.classList.add('hidden');
+             loadingSection.classList.remove('hidden');
+             document.title = 'Переход...'; // Update title
+
+             // 2. Start the redirect process after a delay
+             setTimeout(() => {
+                 // Optional fade-out for the whole container
+                 container.style.transition = 'opacity 0.5s ease-out';
+                 container.style.opacity = '0';
+
+                 // Redirect after fade-out completes
+                 setTimeout(() => {
+                     window.location.href = redirectUrl;
+                 }, 500); // Match fade-out duration
+
+            }, delayAfterConfirm); // Use the delay defined after confirmation
+        });
+
+        // No automatic redirect on page load anymore
+        // The redirect process starts only after the button click.
+
     </script>
 
 </body>
