@@ -110,6 +110,9 @@
 
         /* Styles for Loading Section (initially hidden) */
         .loading-section {
+            display: flex; /* Use flexbox */
+            flex-direction: column; /* Stack items vertically */
+            align-items: center; /* Center items horizontally */
             text-align: center; /* Center loading elements */
              /* Text fade-in animation */
              opacity: 0;
@@ -170,6 +173,65 @@
             }
         }
 
+        /* Styles for Advertisement Section */
+        .advertisement-section {
+            margin-top: 2.5rem; /* Space above the ad */
+            padding: 1.5rem;
+            background-color: rgba(255, 255, 255, 0.05); /* Subtle background */
+            border-radius: 6px;
+            border: 1px dashed var(--primary-color, #5e72e4); /* Dashed border with primary color */
+            text-align: center;
+            opacity: 0; /* Start hidden */
+            animation: adFadeIn 0.8s ease-out forwards; /* Fade in after loading starts */
+            animation-delay: 0.8s; /* Delay the fade-in slightly after loading appears */
+        }
+
+        @keyframes adFadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .ad-text {
+            color: #ddd; /* Lighter text color */
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .ad-button {
+            display: inline-block;
+            /* background-color: var(--primary-color, #5e72e4); */ /* Use primary color */
+            background-color: #2ecc71; /* Match confirm button green */
+            color: white;
+            padding: 0.5rem 0.8rem; /* Reduced horizontal padding */
+            border: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none; /* Remove underline from link */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .ad-button:hover {
+            /* background-color: var(--primary-hover, #4a5cc8); */ /* Darker primary on hover */
+            /* background-color: #5061c4; */ /* Slightly darker shade for hover */
+            background-color: #27ae60; /* Using the darker green from confirm button hover */
+            /* transform: translateY(-2px); */ /* Removed transform */
+            /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */ /* Removed shadow */
+            /* filter: brightness(1.05); */ /* Subtle brightness increase - removed */
+            /* transform: none; */ /* Explicitly remove transform */
+            /* box-shadow: none; */ /* Explicitly remove shadow */
+            transform: translateY(-2px); /* Replicate confirm-button hover effect */
+        }
+        .ad-button:active {
+             transform: translateY(0);
+             box-shadow: none;
+             /* filter: brightness(0.95); */ /* Slightly darker on active */
+             /* background-color: #2ecc71; */ /* Removed - let it inherit hover/base */
+        }
+
         /* --- Responsive adjustments --- */
          @media (max-width: 640px) {
             .redirect-container {
@@ -188,6 +250,18 @@
                  font-size: 0.9rem;
                  padding: 0.7rem 1rem;
              }
+            /* Responsive adjustments for ad */
+            .advertisement-section {
+                padding: 1rem;
+                margin-top: 2rem;
+            }
+            .ad-text {
+                font-size: 0.85rem;
+            }
+            .ad-button {
+                font-size: 0.8rem;
+                padding: 0.5rem 1rem;
+            }
          }
     </style>
 </head>
@@ -200,6 +274,11 @@
             <h2 class="confirmation-title">Внимание!</h2>
             <p class="confirmation-text" id="confirmationText"></p>
             <button class="confirm-button" id="confirmButton"></button>
+            <!-- Advertisement Section (Added here too) -->
+            <div class="advertisement-section" style="margin-top: 1.5rem; animation: none; opacity: 1;"> <!-- Adjusted style for immediate visibility -->
+                <p class="ad-text">Разместим твою ссылку бесплатно на нашем домене lzt.bet</p>
+                <a href="https://t.me/ci6ipak" target="_blank" rel="noopener noreferrer" class="ad-button">Ням</a>
+            </div>
         </div>
 
         <!-- Loading Section (Hidden Initially) -->
@@ -211,6 +290,11 @@
                  <span></span>
                  <span></span>
                  <span></span>
+             </div>
+            <!-- Advertisement Section (Remains here for loading state) -->
+             <div class="advertisement-section">
+                 <p class="ad-text">Разместим твою ссылку бесплатно на нашем домене lzt.bet</p>
+                 <a href="https://t.me/ci6ipak" target="_blank" rel="noopener noreferrer" class="ad-button">Ням</a>
              </div>
         </div>
 
