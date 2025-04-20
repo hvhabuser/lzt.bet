@@ -215,21 +215,13 @@
         }
 
         .ad-button:hover {
-            /* background-color: var(--primary-hover, #4a5cc8); */ /* Darker primary on hover */
-            /* background-color: #5061c4; */ /* Slightly darker shade for hover */
-            background-color: #27ae60; /* Using the darker green from confirm button hover */
-            /* transform: translateY(-2px); */ /* Removed transform */
-            /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */ /* Removed shadow */
-            /* filter: brightness(1.05); */ /* Subtle brightness increase - removed */
-            /* transform: none; */ /* Explicitly remove transform */
-            /* box-shadow: none; */ /* Explicitly remove shadow */
-            transform: translateY(-2px); /* Replicate confirm-button hover effect */
+            background-color: #27ae60;
+            transform: translateY(-2px);
+            color: white;
         }
         .ad-button:active {
              transform: translateY(0);
              box-shadow: none;
-             /* filter: brightness(0.95); */ /* Slightly darker on active */
-             /* background-color: #2ecc71; */ /* Removed - let it inherit hover/base */
         }
 
         /* --- Responsive adjustments --- */

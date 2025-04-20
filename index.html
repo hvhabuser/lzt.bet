@@ -23,7 +23,7 @@
         <nav class="container">
             <a href="#" class="logo">lzt.bet</a>
             <ul class="nav-links">
-                <li><a href="#reviews">Тема</a></li>
+                <li><a href="https://lolz.live/threads/8514735/" target="_blank" rel="noopener noreferrer">Тема</a></li>
             </ul>
             <div class="burger">
                 <div class="line1"></div>
@@ -35,23 +35,154 @@
 
     <section class="hero">
         <div class="hero-content container">
-            <h1><span class="highlight">Python</span> Разработчик &<br> Мастер <span class="highlight">Веб-верстки</span></h1>
-            <a href="#reviews" class="cta-button">Информация</a>
+            <h1 class="reveal-item"><span class="highlight">Python</span> Разработчик &<br> Мастер <span class="highlight">Веб-верстки</span></h1>
+            <a href="#good-code" class="cta-button reveal-item">Информация</a>
         </div>
         <div class="hero-bg-gradient"></div>
     </section>
     <section id="reviews" class="reviews section">
         <div class="container">
-            <h2 class="section-title">Тема на лолзике</h2>
-            <div class="reviews-content">
-                <div class="review-source-card">
-                    <i class="fas fa-star review-icon"></i>
-                    <p>Сиськи письки и<span class="highlight"> отзывы</span> от клиентов собраны в одном месте.</p>
+            <div class="reviews-content reveal-item">
+                <div class="shard-animation-container">
+                    <div class="shard shard-1"></div>
+                    <div class="shard shard-2"></div>
+                    <div class="shard shard-3"></div>
+                    <div class="shard shard-4"></div>
+                    <div class="shard shard-5"></div>
+                    <div class="shard shard-6"></div>
+                    
                     <a href="https://lolz.live/threads/8514735/" target="_blank" rel="noopener noreferrer" class="forum-link-anchor">
                         <div class="forum-link-display">
                             <span class="forum-platform">lolz.live</span><span class="forum-separator">/</span><span class="forum-thread">threads/8514735</span>
                         </div>
                     </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="good-code" class="section">
+        <div class="container">
+            <h2 class="section-title reveal-item">Что я могу?</h2>
+
+            <div class="reveal-item">
+                <h3 style="margin-bottom: 1rem; margin-top: 2rem; text-align: center;">Python - Telegram Bot</h3>
+                <div class="code-showcase collapsed">
+                    <div class="code-header">
+                        <div class="code-header-left">
+                            <img src="assets/python.png" alt="Python Logo" class="code-logo">
+                            <span class="code-filename">bot.py</span>
+                        </div>
+                        <div class="code-header-right">
+                            <span class="run-text">Run bot.py</span>
+                        </div>
+                    </div>
+                    <pre><code class="language-python">
+<span class="code-keyword">from</span> telegram <span class="code-keyword">import</span> Update
+<span class="code-keyword">from</span> telegram.ext <span class="code-keyword">import</span> Updater, CommandHandler, MessageHandler, Filters, CallbackContext
+
+<span class="code-keyword">def</span> <span class="code-function">start</span>(update: Update, context: CallbackContext) -> <span class="code-keyword">None</span>:
+    user = update.effective_user
+    update.message.reply_html(
+        f<span class="code-string">"Привет {user.mention_html()}! Отправь мне сообщение, и я его повторю."</span>,
+    )
+
+<span class="code-keyword">def</span> <span class="code-function">echo</span>(update: Update, context: CallbackContext) -> <span class="code-keyword">None</span>:
+    update.message.reply_text(update.message.text)
+
+<span class="code-keyword">def</span> <span class="code-function">main</span>() -> <span class="code-keyword">None</span>:
+    updater = Updater(<span class="code-string">"YOUR_TOKEN"</span>)
+    dispatcher = updater.dispatcher
+    dispatcher.add_handler(CommandHandler(<span class="code-string">"start"</span>, start))
+    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, echo))
+    updater.start_polling()
+    updater.idle()
+
+<span class="code-keyword">if</span> __name__ == <span class="code-string">'__main__'</span>:
+    main()
+                    </code></pre>
+                    <div class="code-fade-overlay"></div>
+                </div>
+            </div>
+
+            <div class="reveal-item">
+                <h3 style="margin-bottom: 1rem; margin-top: 2rem; text-align: center;">Python - Requests</h3>
+                <div class="code-showcase collapsed">
+                    <div class="code-header">
+                        <div class="code-header-left">
+                            <img src="assets/python.png" alt="Python Logo" class="code-logo">
+                            <span class="code-filename">api_request.py</span>
+                        </div>
+                        <div class="code-header-right">
+                            <span class="run-text">Run api_request.py</span>
+                        </div>
+                    </div>
+                    <pre><code class="language-python">
+<span class="code-keyword">import</span> requests
+<span class="code-keyword">import</span> json
+
+<span class="code-keyword">def</span> <span class="code-function">get_public_ip</span>() -> <span class="code-keyword">str | None</span>:
+    <span class="code-keyword">try</span>:
+        response = requests.get(<span class="code-string">'https://api.ipify.org?format=json'</span>, timeout=<span class="code-number">5</span>)
+        response.raise_for_status()
+        
+        data = response.json()
+        ip_address = data.get(<span class="code-string">'ip'</span>)
+        <span class="code-keyword">return</span> ip_address
+        
+    <span class="code-keyword">except</span> requests.exceptions.RequestException <span class="code-keyword">as</span> e:
+        <span class="code-builtin">print</span>(f<span class="code-string">"Ошибка при запросе: {e}"</span>)
+        <span class="code-keyword">return</span> <span class="code-keyword">None</span>
+    <span class="code-keyword">except</span> json.JSONDecodeError:
+        <span class="code-builtin">print</span>(<span class="code-string">"Ошибка декодирования JSON ответа."</span>)
+        <span class="code-keyword">return</span> <span class="code-keyword">None</span>
+
+<span class="code-keyword">if</span> __name__ == <span class="code-string">'__main__'</span>:
+    my_ip = get_public_ip()
+    <span class="code-keyword">if</span> my_ip:
+        <span class="code-builtin">print</span>(f<span class="code-string">"Ваш публичный IP: {my_ip}"</span>)
+    <span class="code-keyword">else</span>:
+        <span class="code-builtin">print</span>(<span class="code-string">"Не удалось получить IP."</span>)
+                    </code></pre>
+                    <div class="code-fade-overlay"></div>
+                </div>
+            </div>
+
+            <div class="reveal-item">
+                <h3 style="margin-bottom: 1rem; margin-top: 2rem; text-align: center;">HTML</h3>
+                <div class="code-showcase collapsed">
+                    <div class="code-header">
+                        <div class="code-header-left">
+                            <img src="assets/html.png" alt="HTML Logo" class="code-logo">
+                            <span class="code-filename">index.html</span>
+                        </div>
+                        <div class="code-header-right">
+                            <span class="run-text">View index.html</span>
+                        </div>
+                    </div>
+                    <pre><code class="language-html">
+<span class="code-tag">&lt;!DOCTYPE <span class="code-attr-name">html</span>&gt;</span>
+<span class="code-tag">&lt;html <span class="code-attr-name">lang</span>=<span class="code-attr-value">"en"</span>&gt;</span>
+<span class="code-tag">&lt;head&gt;</span>
+    <span class="code-tag">&lt;meta <span class="code-attr-name">charset</span>=<span class="code-attr-value">"UTF-8"</span>&gt;</span>
+    <span class="code-tag">&lt;meta <span class="code-attr-name">name</span>=<span class="code-attr-value">"viewport"</span> <span class="code-attr-name">content</span>=<span class="code-attr-value">"width=device-width, initial-scale=1.0"</span>&gt;</span>
+    <span class="code-tag">&lt;title&gt;</span>Sample Page<span class="code-tag">&lt;/title&gt;</span>
+    <span class="code-tag">&lt;link <span class="code-attr-name">rel</span>=<span class="code-attr-value">"stylesheet"</span> <span class="code-attr-name">href</span>=<span class="code-attr-value">"style.css"</span>&gt;</span>
+<span class="code-tag">&lt;/head&gt;</span>
+<span class="code-tag">&lt;body&gt;</span>
+
+    <span class="code-tag">&lt;header&gt;</span>
+        <span class="code-tag">&lt;h1&gt;</span>Welcome!<span class="code-tag">&lt;/h1&gt;</span>
+    <span class="code-tag">&lt;/header&gt;</span>
+
+    <span class="code-tag">&lt;main&gt;</span>
+        <span class="code-tag">&lt;p&gt;</span>This is a paragraph.<span class="code-tag">&lt;/p&gt;</span>
+    <span class="code-tag">&lt;/main&gt;</span>
+
+<span class="code-tag">&lt;/body&gt;</span>
+<span class="code-tag">&lt;/html&gt;</span>
+                    </code></pre>
+                    <div class="code-fade-overlay"></div>
                 </div>
             </div>
         </div>

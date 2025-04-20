@@ -18,6 +18,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    user-select: none;
 }
 
 html {
@@ -665,30 +666,83 @@ img {
     .nav-links {
         position: fixed;
         right: 0;
-        top: 65px;
-        background-color: var(--card-background);
+        top: 65px; /* Оставляем отступ от шапки */
+        /* Меняем фон на полупрозрачный */
+        background-color: rgba(16, 24, 20, 0.85); /* Используем цвет --card-background с прозрачностью */
+        backdrop-filter: blur(8px); /* Добавляем размытие фона */
         flex-direction: column;
         align-items: center;
         width: 70%;
-        height: 100vh;
+        height: calc(100vh - 65px); /* Высота за вычетом шапки */
         transform: translateX(100%);
         transition: transform 0.5s ease-in;
         border-left: 1px solid var(--border-color);
         padding: 20px 0;
         z-index: 999;
+        /* Убедимся, что overflow виден, если контент вдруг не влезет */
+        overflow-y: auto; 
     }
 
     .nav-links li {
         margin-left: 0;
-        opacity: 0;
-        padding: 15px 0;
+        opacity: 0; /* Оставляем для анимации */
+        padding: 15px 0; /* Стандартный отступ для обычных ссылок */
         width: 100%;
         text-align: center;
     }
-    
+
     .nav-links li a {
         width: 100%;
         display: block;
+        /* Убираем стандартное подчеркивание при hover для всех ссылок меню */
+        border-bottom: 2px solid transparent; 
+    }
+    
+    /* Стилизуем LI для ссылки на форум */
+    .nav-links li:has(a[href*="lolz.live"]) {
+        /* Можно немного уменьшить вертикальный отступ для этого элемента */
+        padding: 10px 0; 
+    }
+
+    /* Стилизуем саму ссылку "Тема", чтобы она выглядела как на десктопе */
+    .nav-links li a[href*="lolz.live"] {
+        display: inline-block; /* Чтобы background и padding работали корректно */
+        width: auto; /* Убираем растягивание на всю ширину */
+        background-color: rgba(0, 0, 0, 0.25);
+        border: 1px solid var(--border-color);
+        padding: 10px 20px; /* Немного адаптируем padding для мобильных */
+        border-radius: 6px;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 1rem; /* Адаптируем размер шрифта */
+        color: var(--primary-color); /* Явный цвет */
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+        /* Убираем возможное наследование text-transform, если оно есть */
+        text-transform: none; 
+        letter-spacing: normal;
+    }
+    
+    /* Убираем стандартный hover эффект и добавляем новый */
+    .nav-links li a[href*="lolz.live"]:hover,
+    .nav-links li a[href*="lolz.live"].active { /* Если используется класс active */
+        background-color: rgba(0, 0, 0, 0.4);
+        border-color: rgba(87, 179, 141, 0.5);
+        color: var(--primary-color); /* Цвет при наведении остается тем же */
+        border-bottom-color: transparent; /* Убираем подчеркивание */
+    }
+    
+    /* Стили для обычных ссылок меню */
+    .nav-links li a:not([href*="lolz.live"]) {
+        /* Оставляем стандартные стили для других ссылок */
+        font-weight: 400;
+        padding-bottom: 5px; /* Восстанавливаем отступ для подчеркивания */
+    }
+    
+    .nav-links li a:not([href*="lolz.live"]):hover,
+    .nav-links li a:not([href*="lolz.live"]).active {
+        color: var(--primary-color);
+        border-bottom-color: var(--primary-color); /* Возвращаем подчеркивание для активных/hover */
+        background-color: transparent; /* Убеждаемся что нет фона */
+        border-color: transparent; /* Убеждаемся что нет рамки */
     }
 
     .nav-links.nav-active {
@@ -750,6 +804,22 @@ img {
      }
     .review-note {
         font-size: 0.85rem;
+    }
+
+    .code-logo {
+        height: 1.3em;
+    }
+
+    .reviews-content {
+        padding: 0 15px;
+    }
+
+    section#reviews {
+        display: none; /* Скрываем секцию с шардамы на мобильных */
+    }
+
+    #good-code {
+        /* margin-top: 0; */ /* Убедись, что здесь нет лишнего отступа */
     }
 }
 
@@ -852,16 +922,21 @@ img {
     font-weight: 600; /* Можно сделать жирнее */
 }
 
-/* Простая анимация появления секций при скролле */
+/* Remove animation styles from .section */
 .section {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    /* No animation properties here anymore */
 }
 
-.section.visible {
+/* Apply animation to individual reveal items */
+.reveal-item {
+    opacity: 0;
+    transform: scale(0.9); /* Start slightly smaller */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Apply transition to both properties */
+}
+
+.reveal-item.visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1); /* Scale to normal size when visible */
 }
 
 /* Reviews Section */
@@ -875,60 +950,6 @@ img {
     margin: 0 auto;
 }
 
-.review-source-card {
-    background-color: var(--card-background);
-    padding: 2.5rem 2rem;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    position: relative;
-    overflow: hidden; /* Для псевдоэлемента */
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25); /* Немного тени */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.review-source-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-}
-
-/* Небольшой эффект градиентной рамки при наведении */
-.review-source-card::before {
-    content: '';
-    position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
-    z-index: 0; /* Под контентом карточки */
-    margin: -1px; /* Толщина рамки */
-    border-radius: inherit;
-    background: var(--gradient-accent);
-    opacity: 0;
-    transition: opacity 0.4s ease-in-out;
-    pointer-events: none;
-}
-
-.review-source-card:hover::before {
-    opacity: 0.6; /* Показать градиентную рамку */
-}
-
-/* Контент внутри карточки должен быть над псевдоэлементом */
-.review-source-card > * {
-    position: relative;
-    z-index: 1;
-}
-
-.review-icon {
-    font-size: 2.5rem;
-    color: var(--primary-color);
-    margin-bottom: 1.5rem;
-    display: block;
-}
-
-.review-source-card p {
-    color: var(--text-color);
-    font-size: 1.1rem;
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-}
-
 .forum-link-display {
     background-color: rgba(0, 0, 0, 0.25); /* Фон для блока ссылки */
     border: 1px solid var(--border-color);
@@ -939,7 +960,7 @@ img {
     margin-bottom: 1.5rem;
     font-family: 'Courier New', Courier, monospace; /* Моноширинный шрифт */
     font-size: 1.15rem;
-    transition: background-color 0.3s ease, border-color 0.3s ease; /* Добавляем border-color in transition */
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease; /* Добавляем transform */
     width: auto; /* Убедимся что ширина автоматическая */
     color: inherit; /* Наследуем цвет текста */
     text-decoration: none; /* Убираем подчеркивание у ссылки */
@@ -950,15 +971,17 @@ img {
     display: inline-block; /* Чтобы ссылка занимала место как блок */
     text-decoration: none; /* Убираем стандартное подчеркивание */
     transition: transform 0.2s ease; /* Добавляем легкий эффект приподнимания */
+    position: relative; /* Для z-index */
+    z-index: 10; /* Чтобы ссылка была над осколками */
 }
 
 .forum-link-anchor:hover {
-    transform: scale(1.03); /* Слегка увеличиваем при наведении */
+    transform: scale(1.05); /* Немного увеличиваем при наведении на саму ссылку */
     color: inherit; /* Предотвращаем изменение цвета текста при наведении на ссылку */
 }
 
-.review-source-card:hover .forum-link-display {
-     background-color: rgba(0, 0, 0, 0.4); /* Чуть темнее при наведении на карточку */
+.forum-link-anchor:hover .forum-link-display {
+     background-color: rgba(0, 0, 0, 0.4); /* Чуть темнее при наведении на ссылку */
      border-color: rgba(87, 179, 141, 0.5); /* Слегка подсветить рамку */
 }
 
@@ -977,12 +1000,344 @@ img {
     color: var(--text-color);
 }
 
-/* Убираем стиль .review-note, т.к. удалили элемент */
-/* .review-note {
+.shard-animation-container {
+    position: relative; /* База для абсолютного позиционирования дочерних элементов */
+    min-height: 450px; /* Даем пространство для осколков */
+    display: flex; /* Используем flex для центрирования */
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0; /* Добавим отступы сверху/снизу */
+    overflow: hidden; /* Скроем части осколков, выходящие за контейнер */
+}
+
+.shard {
+    position: absolute;
+    background-color: rgba(87, 179, 141, 0.15);
+    border: 1px solid rgba(87, 179, 141, 0.3);
+    backdrop-filter: blur(3px);
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(64, 142, 113, 0.15);
+    /* Убираем старые анимации и добавляем одну плавную */
+    animation: floatShard 15s infinite ease-in-out;
+}
+
+/* Добавляем разные траектории для каждого осколка */
+.shard-1 {
+    width: 120px; height: 150px;
+    top: 10%; left: 15%;
+    clip-path: polygon(0% 0%, 100% 20%, 80% 100%, 20% 80%);
+    animation-name: floatShard1;
+}
+
+.shard-2 {
+    width: 100px; height: 130px;
+    top: 15%; right: 10%;
+    clip-path: polygon(20% 0%, 100% 0%, 80% 80%, 0% 100%);
+    animation-name: floatShard2;
+    animation-duration: 18s;
+}
+
+.shard-3 {
+    width: 140px; height: 110px;
+    bottom: 10%; left: 20%;
+    clip-path: polygon(0% 30%, 70% 0%, 100% 100%, 30% 100%);
+    animation-name: floatShard3;
+    animation-duration: 20s;
+}
+
+.shard-4 {
+    width: 90px; height: 160px;
+    bottom: 5%; right: 18%;
+    clip-path: polygon(30% 0%, 100% 70%, 70% 100%, 0% 30%);
+    animation-name: floatShard4;
+    animation-duration: 17s;
+}
+
+.shard-5 {
+    width: 110px; height: 110px;
+    top: 50%; left: 5%;
+    transform: translateY(-50%);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    animation-name: floatShard5;
+    animation-duration: 19s;
+}
+
+.shard-6 {
+    width: 130px; height: 90px;
+    top: 60%; right: 3%;
+    transform: translateY(-50%);
+    clip-path: polygon(0% 0%, 100% 0%, 75% 100%, 25% 100%);
+    animation-name: floatShard6;
+    animation-duration: 16s;
+}
+
+/* Плавные анимации с разными траекториями для каждого осколка */
+@keyframes floatShard1 {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(15px, 10px) rotate(5deg); }
+    50% { transform: translate(5px, -15px) rotate(10deg); }
+    75% { transform: translate(-10px, -5px) rotate(5deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+@keyframes floatShard2 {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(-12px, 15px) rotate(-8deg); }
+    66% { transform: translate(8px, -10px) rotate(-4deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+@keyframes floatShard3 {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    20% { transform: translate(10px, -10px) rotate(5deg); }
+    40% { transform: translate(15px, 5px) rotate(10deg); }
+    60% { transform: translate(5px, 12px) rotate(5deg); }
+    80% { transform: translate(-8px, 8px) rotate(0deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+@keyframes floatShard4 {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(-10px, -15px) rotate(-5deg); }
+    50% { transform: translate(-15px, 0px) rotate(-10deg); }
+    75% { transform: translate(-5px, 10px) rotate(-5deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+@keyframes floatShard5 {
+    0% { transform: translateY(-50%) rotate(0deg); }
+    33% { transform: translateY(-60%) translate(12px, 0) rotate(8deg); }
+    66% { transform: translateY(-40%) translate(-8px, 0) rotate(4deg); }
+    100% { transform: translateY(-50%) rotate(0deg); }
+}
+
+@keyframes floatShard6 {
+    0% { transform: translateY(-50%) rotate(0deg); }
+    20% { transform: translateY(-45%) translate(-10px, 0) rotate(-5deg); }
+    40% { transform: translateY(-55%) translate(0, 0) rotate(-10deg); }
+    60% { transform: translateY(-48%) translate(12px, 0) rotate(-5deg); }
+    80% { transform: translateY(-52%) translate(5px, 0) rotate(-2deg); }
+    100% { transform: translateY(-50%) rotate(0deg); }
+}
+
+/* Адаптация для меньших экранов */
+@media (max-width: 768px) {
+    .shard-animation-container {
+        min-height: 550px; /* Больше места на мобилках */
+    }
+    .shard {
+        /* Уменьшим размер осколков */
+        transform: scale(0.7);
+    }
+    /* Скорректируем позиции, чтобы не перекрывали центр */
+    .shard-1 { top: 5%; left: 5%; }
+    .shard-2 { top: 8%; right: 3%; }
+    .shard-3 { bottom: 5%; left: 8%; }
+    .shard-4 { bottom: 3%; right: 5%; }
+    .shard-5 { display: none; } /* Скроем некоторые на маленьких экранах */
+    .shard-6 { top: 70%; right: 2%; }
+}
+
+
+.code-showcase {
+    /* Use a semi-transparent version of the background for the blur effect */
+    background-color: rgba(16, 24, 20, 0.8); /* Сделаем фон чуть менее прозрачным для лучшего вида при анимации */
+    backdrop-filter: blur(10px); 
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    position: relative;
+    /* Убираем фиксированную max-height отсюда */
+    overflow: hidden; /* Оставляем, чтобы обрезать контент во время анимации */
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
     font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0 auto;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    /* Добавляем transition для max-height */
+    transition: max-height 0.4s ease-in-out; 
+}
+
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    /* Make header slightly different background but also blurred */
+    background-color: rgba(16, 24, 20, 0.75); /* Semi-transparent version of --card-background */
+    backdrop-filter: blur(8px); /* Apply blur effect */
+    border-radius: 8px 8px 0 0;
+    flex-shrink: 0;
+    cursor: pointer; /* Указываем, что элемент кликабельный */
+    position: relative; /* Для позиционирования псевдоэлемента */
+    /* Задаем минимальную высоту, чтобы она учитывалась в max-height */
+    min-height: 50px; /* Примерное значение, можно подогнать точнее */
+    /* Добавим z-index, чтобы шапка была над кодом во время transition */
+    z-index: 2; 
+}
+
+.code-header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Renamed from .python-logo to .code-logo */
+.code-logo {
+    height: 1.5em;
+    width: auto;
+    vertical-align: middle;
+}
+
+.code-filename {
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.code-header-right {
+    display: flex; /* Используем flex для выравнивания текста и стрелки */
+    align-items: center;
+    gap: 0.5rem; /* Отступ между текстом и стрелкой */
+}
+
+/* Стрелочка-индикатор */
+.code-header-right::before {
+    content: '▾'; /* Стрелка вниз (развернуть) по умолчанию */
+    display: inline-block;
+    font-size: 1.2em;
+    line-height: 1;
     color: var(--text-secondary);
-    margin-top: 1.5rem;
-    margin-bottom: 0;
-    font-style: italic;
-    opacity: 0.8;
+    transition: transform 0.3s ease;
+    /* Добавим легкую тень для лучшей видимости */
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Стили для свернутого состояния */
+.code-showcase.collapsed {
+     /* Устанавливаем max-height равной высоте шапки. 
+        Подбери значение точнее, измерив высоту шапки в инспекторе. 
+        Например, если padding 0.75rem (12px) * 2 + line-height ~ 24px = ~48px. Округлим до 50px */
+    max-height: 50px; 
+    border-bottom-color: var(--border-color); /* Возвращаем границу снизу */
+}
+
+.code-showcase.collapsed pre,
+.code-showcase.collapsed .code-fade-overlay {
+    /* Убираем display: none */
+    opacity: 0; /* Скрываем через прозрачность */
+    pointer-events: none; /* Отключаем взаимодействие с невидимым кодом */
+}
+
+/* Удаляем правило для скрытия границы шапки в collapsed состоянии */
+/* .code-showcase.collapsed .code-header {
+    border-bottom-color: transparent; 
 } */
+
+/* Поворачиваем стрелку, когда блок развернут */
+.code-showcase:not(.collapsed) .code-header-right::before {
+    transform: rotate(180deg); /* Стрелка вверх */
+}
+
+/* Устанавливаем max-height для развернутого состояния */
+.code-showcase:not(.collapsed) {
+    /* Достаточно большая высота, чтобы вместить код */
+    max-height: 600px; /* Или используй '40em' или другое значение */
+}
+
+.code-showcase pre {
+    margin: 0;
+    padding: 1.5rem;
+    white-space: pre;
+    /* Заменяем auto на hidden, чтобы убрать скроллбар */
+    overflow-y: hidden; 
+    flex-grow: 1;
+    min-height: 0;
+    opacity: 1; /* Явно указываем opacity для transition */
+    /* Добавляем transition для opacity с небольшой задержкой */
+    transition: opacity 0.3s ease-in 0.1s; 
+}
+
+.code-showcase code {
+    display: block;
+    color: #c9d1d9;
+}
+
+/* Basic Syntax Highlighting Styles */
+.code-showcase .code-comment {
+    color: #8b949e; /* Grey for comments */
+}
+/* Python specific */
+.code-showcase .code-keyword {
+    color: #ff7b72; /* Coral/Red */
+}
+.code-showcase .code-function {
+    color: #d2a8ff; /* Purple */
+}
+.code-showcase .code-string {
+    color: #a5d6ff; /* Light blue */
+}
+.code-showcase .code-number {
+    color: #79c0ff; /* Blue */
+}
+.code-showcase .code-builtin {
+    color: #ffa657; /* Orange */
+}
+/* HTML specific */
+.code-showcase .code-tag {
+    color: #7ee787; /* Green for tags */
+}
+.code-showcase .code-attr-name {
+    color: #d2a8ff; /* Purple for attribute names */
+}
+.code-showcase .code-attr-value {
+    color: #a5d6ff; /* Light blue for attribute values */
+}
+
+
+/* Fade Overlay */
+.code-fade-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    /* Fade to the new semi-transparent background of .code-showcase */
+    background: linear-gradient(to bottom, transparent, rgba(10, 16, 13, 1) 95%); /* Fade to darker version of the showcase bg */
+    pointer-events: none;
+    border-radius: 0 0 8px 8px;
+    z-index: 1;
+    opacity: 1; /* Явно указываем opacity для transition */
+    transition: opacity 0.3s ease-in 0.1s; /* Такая же анимация, как у pre */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .code-showcase {
+        /* Убираем max-height */
+        font-size: 0.85rem;
+    }
+     /* Корректируем max-height для мобильных, если нужно */
+    .code-showcase.collapsed {
+        max-height: 45px; /* Примерно подгоняем под размер шапки на мобильных */
+    }
+    .code-showcase:not(.collapsed) {
+        max-height: 500px; /* Уменьшаем для мобильных */
+    }
+
+    .code-header {
+         padding: 0.6rem 1rem;
+         min-height: 45px; /* Соответствует collapsed max-height */
+    }
+    .code-showcase pre {
+         padding: 1rem;
+    }
+    /* ... other existing 768px styles ... */
+}
+
+
+/* Ensure other media queries follow */
+@media (max-width: 576px) {
+    /* ... existing media query styles ... */
+}

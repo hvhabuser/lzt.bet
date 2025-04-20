@@ -75,34 +75,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // Плавная прокрутка (уже есть через CSS `scroll-behavior: smooth;`, но можно добавить для большей совместимости)
     // --- Опционально ---
 
-    // Анимация появления секций при скролле
-    const sections = document.querySelectorAll('.section');
+    // Анимация появления элементов при скролле
+    const revealItems = document.querySelectorAll('.reveal-item'); // Select new class
 
-    const revealSection = (entries, observer) => {
+    const revealElement = (entries, observer) => { // Renamed function for clarity
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                // Отключаем наблюдение после первого появления, если нужно
-                // observer.unobserve(entry.target);
+            } else {
+                entry.target.classList.remove('visible');
             }
-            // Можно добавить else для скрытия при выходе из вьюпорта
-            // else { entry.target.classList.remove('visible'); }
         });
     };
 
-    const sectionObserver = new IntersectionObserver(revealSection, {
-        root: null, // viewport
-        threshold: 0.15, // Секция становится видимой при 15% попадании в экран
-        // rootMargin: "-50px" // Можно настроить отступ
+    const itemObserver = new IntersectionObserver(revealElement, { // Renamed observer
+        root: null,
+        threshold: 0.1, // Adjust threshold as needed
     });
 
-    sections.forEach(section => {
-        sectionObserver.observe(section);
+    revealItems.forEach(item => { // Iterate over new nodelist
+        itemObserver.observe(item); // Observe each item
     });
 
 
     // Подсветка активного пункта меню при скролле
-    const navLinksAnchors = document.querySelectorAll('.nav-links a'); // Получаем все ссылки в навигации
+    const sections = document.querySelectorAll('.section'); // Keep this for menu highlighting
+    const navLinksAnchors = document.querySelectorAll('.nav-links a');
     const headerHeight = document.querySelector('.header').offsetHeight;
 
     const highlightMenu = () => {
@@ -148,5 +146,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', highlightMenu);
     window.addEventListener('load', highlightMenu); // Вызываем при загрузке на случай, если страница загрузилась не вверху
+
+    // Collapsible code blocks
+    const codeHeaders = document.querySelectorAll('.code-header');
+
+    codeHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const codeShowcase = header.closest('.code-showcase');
+            if (codeShowcase) {
+                codeShowcase.classList.toggle('collapsed');
+            }
+        });
+    });
 
 }); 
