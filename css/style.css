@@ -818,9 +818,6 @@ img {
         display: none; /* Скрываем секцию с шардамы на мобильных */
     }
 
-    #good-code {
-        /* margin-top: 0; */ /* Убедись, что здесь нет лишнего отступа */
-    }
 }
 
 @media (max-width: 576px) {
@@ -920,11 +917,6 @@ img {
 .nav-links a.active {
     color: var(--primary-color);
     font-weight: 600; /* Можно сделать жирнее */
-}
-
-/* Remove animation styles from .section */
-.section {
-    /* No animation properties here anymore */
 }
 
 /* Apply animation to individual reveal items */
@@ -1157,6 +1149,10 @@ img {
     flex-direction: column;
     /* Добавляем transition для max-height */
     transition: max-height 0.4s ease-in-out; 
+    transform-style: preserve-3d;
+    transform: perspective(1000px) rotateX(5deg);
+    transition: transform 0.4s ease;
+    max-height: 600px; /* Default expanded height */
 }
 
 .code-header {
@@ -1165,16 +1161,13 @@ img {
     align-items: center;
     padding: 0.75rem 1.5rem;
     border-bottom: 1px solid var(--border-color);
-    /* Make header slightly different background but also blurred */
-    background-color: rgba(16, 24, 20, 0.75); /* Semi-transparent version of --card-background */
-    backdrop-filter: blur(8px); /* Apply blur effect */
+    background-color: rgba(42, 45, 50, 0.85);
+    backdrop-filter: blur(8px);
     border-radius: 8px 8px 0 0;
     flex-shrink: 0;
-    cursor: pointer; /* Указываем, что элемент кликабельный */
-    position: relative; /* Для позиционирования псевдоэлемента */
-    /* Задаем минимальную высоту, чтобы она учитывалась в max-height */
-    min-height: 50px; /* Примерное значение, можно подогнать точнее */
-    /* Добавим z-index, чтобы шапка была над кодом во время transition */
+    cursor: pointer;
+    position: relative;
+    min-height: 50px;
     z-index: 2; 
 }
 
@@ -1182,6 +1175,38 @@ img {
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    position: relative;
+    padding-left: 60px; /* Space for macOS buttons */
+}
+
+/* macOS window buttons */
+.mac-buttons {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 6px;
+}
+
+.mac-button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.mac-close {
+    background-color: #ff5f56;
+}
+
+.mac-minimize {
+    background-color: #ffbd2e;
+}
+
+.mac-expand {
+    background-color: #27c93f;
 }
 
 /* Renamed from .python-logo to .code-logo */
@@ -1216,24 +1241,14 @@ img {
 
 /* Стили для свернутого состояния */
 .code-showcase.collapsed {
-     /* Устанавливаем max-height равной высоте шапки. 
-        Подбери значение точнее, измерив высоту шапки в инспекторе. 
-        Например, если padding 0.75rem (12px) * 2 + line-height ~ 24px = ~48px. Округлим до 50px */
-    max-height: 50px; 
-    border-bottom-color: var(--border-color); /* Возвращаем границу снизу */
+    max-height: 600px; /* Same as expanded height */
 }
 
 .code-showcase.collapsed pre,
 .code-showcase.collapsed .code-fade-overlay {
-    /* Убираем display: none */
-    opacity: 0; /* Скрываем через прозрачность */
-    pointer-events: none; /* Отключаем взаимодействие с невидимым кодом */
+    opacity: 1;
+    pointer-events: auto;
 }
-
-/* Удаляем правило для скрытия границы шапки в collapsed состоянии */
-/* .code-showcase.collapsed .code-header {
-    border-bottom-color: transparent; 
-} */
 
 /* Поворачиваем стрелку, когда блок развернут */
 .code-showcase:not(.collapsed) .code-header-right::before {
@@ -1340,4 +1355,13 @@ img {
 /* Ensure other media queries follow */
 @media (max-width: 576px) {
     /* ... existing media query styles ... */
+}
+
+.code-showcase:hover {
+    transform: perspective(1000px) rotateX(0deg);
+    box-shadow: 0 10px 30px rgba(87, 179, 141, 0.3);
+}
+
+.code-showcase:hover .mac-button {
+    transform: scale(1.1);
 }
